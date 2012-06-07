@@ -8,6 +8,8 @@
 
 #import "CMViewController.h"
 #import "ContentViewController.h"
+#import "ContentViewPadController.h"
+#import "ContentViewPhoneController.h"
 
 @interface CMViewController ()
 
@@ -42,10 +44,19 @@
     [self.pageViewController setDataSource:self];
     
     // Set initial view controller
-    ContentViewController *contentViewController = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
-    contentViewController.pageNumber = 0;
     
-    contentViewController.labelContents = [self.modelArray objectAtIndex:self.currentPage];
+    
+    ContentViewController *contentViewController = nil;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        contentViewController = [[ContentViewPhoneController alloc] initWithNibName:@"ContentView" bundle:nil];
+        //contentViewController = (ContentViewController *)phoneController;
+    } else {
+        contentViewController = [[ContentViewPadController alloc] initWithNibName:@"ContentView" bundle:nil];
+        //contentViewController = (ContentViewController *)padController;
+    }
+
+    contentViewController.pageNumber = 0;
     
     NSString *imageName = [NSString stringWithFormat:@"page_%d.jpg", contentViewController.pageNumber + 1];
     contentViewController.imageName = imageName;
@@ -99,8 +110,7 @@
         
     } else {
         
-        ContentViewController *nextContentController = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
-        nextContentController.labelContents = [self.modelArray objectAtIndex:currentContentController.pageNumber - 1];
+        ContentViewController *nextContentController = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
 
         nextContentController.pageNumber = currentContentController.pageNumber - 1;
         NSString *imageName = [NSString stringWithFormat:@"page_%d.jpg", nextContentController.pageNumber + 1];
@@ -122,8 +132,7 @@
         
     } else {
         
-        ContentViewController *nextContentController = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
-        nextContentController.labelContents = [self.modelArray objectAtIndex:currentContentController.pageNumber + 1];
+        ContentViewController *nextContentController = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
         
         nextContentController.pageNumber = currentContentController.pageNumber + 1;
         NSString *imageName = [NSString stringWithFormat:@"page_%d.jpg", nextContentController.pageNumber + 1];

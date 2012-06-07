@@ -18,9 +18,7 @@
 @implementation ContentViewController
 
 @synthesize pageNumber = _pageNumber;
-@synthesize labelContents = _labelContents;
 @synthesize imageName = _imageName;
-@synthesize pageLabel = _pageLabel;
 @synthesize scrollView = _scrollView;
 
 @synthesize imageView = _imageView;
@@ -39,8 +37,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.pageLabel.text = self.labelContents;
-    
     UIImage *image = [UIImage imageNamed:self.imageName];
     self.imageView = [[UIImageView alloc] initWithImage:image];
     
@@ -56,26 +52,9 @@
 
 - (void)viewDidUnload
 {
-    [self setPageLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Check for orientation
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        // is landscape
-        [self.scrollView setZoomScale:0.25];
-        [self.scrollView setMinimumZoomScale:0.25];
-    } else {
-        // is portrait
-        [self.scrollView setZoomScale:0.5];
-        [self.scrollView setMinimumZoomScale:0.5];
-    }
-    
-	return YES;
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -94,6 +73,12 @@
         [self.scrollView setZoomScale:0.5 animated:YES];
         
     }
+    
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    return YES;
     
 }
 

@@ -19,7 +19,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[CMViewController alloc] initWithNibName:@"CMViewController" bundle:nil];
+    self.viewController = [[CMViewController alloc] initWithNibName:@"CMMainView" bundle:nil];
     [self.viewController setWantsFullScreenLayout:YES];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

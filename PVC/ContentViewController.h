@@ -11,9 +11,7 @@
 @interface ContentViewController : UIViewController <UIScrollViewDelegate>
 
 @property (nonatomic ) int pageNumber;
-@property (nonatomic, copy) NSString *labelContents;
 @property (nonatomic, copy) NSString *imageName;
-@property (strong, nonatomic) IBOutlet UILabel *pageLabel;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 
 @end
